@@ -26,7 +26,7 @@ class RegisterSerializer(serializers.Serializer):
       first_name = data['first_name'],
       last_name = data['last_name'],
       email = data['email'],
-      #telegram_chat_id = data['telegram_chat_id'],
+      telegram_chat_id = data['telegram_chat_id'],
       username = data['username'].lower()
       )
     
