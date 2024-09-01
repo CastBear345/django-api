@@ -15,7 +15,7 @@ class BaseModel(models.Model):
 class Post(BaseModel):
   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts")
   title = models.CharField(max_length=500)
-  blog_text = models.TextField()
+  post_text = models.TextField()
 
   def __str__(self) -> str:
     return self.title
