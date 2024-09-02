@@ -6,7 +6,35 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import Post
 from .serializers import PostSerializer
+
 from django.db.models import Q
+from django.core.paginator import Paginator
+
+class PublicPost(APIView):
+  def get(self, request):
+    try:
+      posts = Post.objects.all().order_by('?')
+
+      if request.GET.get('search'):
+        search = request.GET.get('search')
+        posts = posts.filter(Q(title__icontains = search) | Q(post_text__icontains = search))
+
+      page_number = request.GET.get('page', 1)
+      paginator = Paginator(posts, 10)
+
+      serializer = PostSerializer(paginator.page(page_number), many = True)
+
+      return Response({
+        'data': serializer.data,
+        'message': 'Posts fetched success'
+      }, status=status.HTTP_200_OK)
+    
+    except Exception as e:
+      print(e)
+      return Response({
+        'data' : {},
+        'message' : 'Something went wrong or invalid page'
+      }, status=status.HTTP_400_BAD_REQUEST)
 
 class PostView(APIView):
   permission_classes = [IsAuthenticated]
