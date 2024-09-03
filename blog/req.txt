@@ -1,0 +1,8 @@
+•	POST /api/account/register/ — создать аккаунт
+•	GET /api/account/login — войти в аккаунт
+•	GET /api/post/ — список всех постов
+•	POST /api/post/details/ — добавить пост
+•	GET /api/post/details/?page=... — детальный просмотр поста
+•	GET /api/post/details/?search=... — поиск поста
+•	PATCH /api/post/details/ — изменение
+•	DELETE /api/post/details/ — удаление поста
